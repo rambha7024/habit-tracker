@@ -73,46 +73,73 @@ Copy code
 ```bash
 git clone https://github.com/your-username/habit-tracker.git
 cd habit-tracker
+
+---
+
+
 ### 2️⃣ Build and Run the Application
 mvn spring-boot:run
+
+---
+
+
 ### 3️⃣ Access the Application
 👉 Open your browser and go to:
 http://localhost:8080/habits
 
-🧩 Example Data
+---
+
+
+##🧩 Example Data
 Name	Description	Start Date	Completed
 Exercise	Workout 30 mins daily	2025-10-04	✅
 Meditation	Meditate 15 mins daily	2025-10-04	☐
 Reading	Read 10 pages daily	2025-10-04	☐
 
-📊 Progress Chart
+---
+
+
+##📊 Progress Chart
 Your progress is automatically displayed in a visual chart using Chart.js!
 The percentage updates dynamically whenever you mark a habit as complete.
 
 Progress: 2 / 3 habits completed ✅
 
-🎨 UI Preview
+---
+
+
+##🎨 UI Preview
 Dashboard View
 
 
 Add Habit Form
 
+---
 
-💡 Future Enhancements
+##💡 Future Enhancements
 🚀 Add user authentication (Spring Security)
 🔔 Daily reminders for pending habits
 🔥 Streak tracking and achievement badges
 🗃️ Migrate from H2 to MySQL or PostgreSQL
 
-👩‍💻 Author
+---
+
+
+##👩‍💻 Author
 👤 Rambha Rasmitha
 💼 Developer of the Habit Tracker Web App
 💬 Built using Java, Spring Boot, and Thymeleaf
 🌐 GitHub: https://github.com/rambha7024
 
-📜 License
+---
+
+
+##📜 License
 This project is licensed under the MIT License — free to use, share, and modify.
 
-🌈 Quote
+---
+
+
+##🌈 Quote
 “Small daily improvements lead to stunning long-term results.” 🌟
 
