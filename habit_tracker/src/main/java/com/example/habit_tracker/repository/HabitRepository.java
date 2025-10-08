@@ -1,7 +1,9 @@
 package com.example.habit_tracker.repository;
 
 import com.example.habit_tracker.model.Habit;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface HabitRepository extends JpaRepository<Habit, Long> {
+@Repository
+public interface HabitRepository extends CrudRepository<Habit, Long> {
 }

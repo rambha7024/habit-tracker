@@ -12,8 +12,8 @@ public class Habit {
 
     private String name;
     private String description;
-    private LocalDate startDate;
     private boolean completed = false;
+    private LocalDate startDate;
 
     public Habit() {
         this.startDate = LocalDate.now();
@@ -22,19 +22,23 @@ public class Habit {
     public Habit(String name, String description) {
         this.name = name;
         this.description = description;
+        this.completed = false;
         this.startDate = LocalDate.now();
     }
 
     // Getters and setters
     public Long getId() { return id; }
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public LocalDate getStartDate() { return startDate; }
-    public boolean isCompleted() { return completed; }
-
     public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
+    public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
+
+    public boolean isCompleted() { return completed; }
     public void setCompleted(boolean completed) { this.completed = completed; }
+
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 }

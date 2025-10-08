@@ -7,81 +7,48 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Controller
+@RequestMapping("/habits")
 public class HabitController {
 
     @Autowired
     private HabitRepository habitRepository;
 
-    // Display all habits (main page)
-    @GetMapping({"/", "/habits"})
-    public String getHabits(Model model) {
-        List<Habit> habits = habitRepository.findAll();
-        model.addAttribute("habits", habits);
-
-        // Calculate counts and percentage for the chart and summary
-        long completedCount = habits.stream().filter(Habit::isCompleted).count();
-        long totalCount = habits.size();
-        double progressPercentage = totalCount > 0 ? Math.round((completedCount / (double) totalCount) * 100) : 0;
-
-        model.addAttribute("completedCount", completedCount);
-        model.addAttribute("totalCount", totalCount);
-        model.addAttribute("progressPercentage", progressPercentage);  // NEW: Pass pre-calculated percentage
-
-        return "habits"; // Renders habits.html
+    @GetMapping
+    public String getAllHabits(Model model) {
+        model.addAttribute("habits", habitRepository.findAll());
+        return "habits";
     }
 
-    // Show form to add new habit
-    @GetMapping("/habit/add")
-    public String showAddForm(Model model) {
-        Habit newHabit = new Habit();
-        newHabit.setStartDate(LocalDate.now());  // Default to today
-        newHabit.setCompleted(false);  // Default to incomplete
-        model.addAttribute("habit", newHabit);
+    @GetMapping("/new")
+    public String showHabitForm(Model model) {
+        model.addAttribute("habit", new Habit());
         return "habit_form";
     }
 
-    // Handle form submission to add habit
-    @PostMapping("/habit/add")
-    public String addHabit(@ModelAttribute Habit habit) {
+    @PostMapping
+    public String saveHabit(@ModelAttribute Habit habit) {
         habitRepository.save(habit);
         return "redirect:/habits";
     }
 
-    // Show form to edit existing habit
-    @GetMapping("/habit/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
+    @GetMapping("/edit/{id}")
+    public String editHabit(@PathVariable Long id, Model model) {
         Habit habit = habitRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid habit Id: " + id));
         model.addAttribute("habit", habit);
         return "habit_form";
     }
 
-    // Handle habit edit
-    @PostMapping("/habit/edit/{id}")
-    public String editHabit(@PathVariable Long id, @ModelAttribute Habit habit) {
-        habit.setId(id);
+    @PostMapping("/update")
+    public String updateHabit(@ModelAttribute Habit habit) {
         habitRepository.save(habit);
         return "redirect:/habits";
     }
 
-    // Delete habit
-    @GetMapping("/habit/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteHabit(@PathVariable Long id) {
         habitRepository.deleteById(id);
-        return "redirect:/habits";
-    }
-
-    // Optional: Toggle habit completion
-    @PostMapping("/habit/toggle/{id}")
-    public String toggleHabit(@PathVariable Long id, @RequestParam boolean completed) {
-        Habit habit = habitRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid habit Id: " + id));
-        habit.setCompleted(completed);
-        habitRepository.save(habit);
         return "redirect:/habits";
     }
 }

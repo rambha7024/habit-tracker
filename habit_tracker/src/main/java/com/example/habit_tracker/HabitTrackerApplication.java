@@ -15,12 +15,11 @@ public class HabitTrackerApplication {
     }
 
     @Bean
-    CommandLineRunner initDB(HabitRepository repo) {
-        return args -> {
-            if (repo.count() == 0) {
-                repo.save(new Habit("Exercise", "Workout 30 mins daily"));
-                repo.save(new Habit("Meditation", "Meditate 15 mins daily"));
-            }
+    public CommandLineRunner loadData(HabitRepository habitRepository) {
+        return (args) -> {
+            habitRepository.save(new Habit("Exercise", "Workout 30 mins daily"));
+            habitRepository.save(new Habit("Meditation", "Meditate 15 mins daily"));
+            habitRepository.save(new Habit("Reading", "Read 20 pages"));
         };
     }
 }
