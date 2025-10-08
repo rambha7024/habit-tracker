@@ -40,6 +40,14 @@ It helps users **add, track, and visualize daily habits** with progress charts a
 | **Version Control** | Git & GitHub |
 
 ---
+## ⚙️ Setup Instructions
+
+### Prerequisites
+
+- Java JDK 17+ installed
+- Maven installed
+- MySQL installed and running
+- IDE (IntelliJ IDEA or VS Code recommended)
 
 ## 🏗️ Project Structure
 
