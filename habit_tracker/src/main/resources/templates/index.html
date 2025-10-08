@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Habit Tracker</h1>
+
+    <form th:action="@{/habit/add}" method="post">
+        <input type="text" name="name" placeholder="Habit Name" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <button type="submit">Add Habit</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Done ✅</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="habit : ${habits}" th:classappend="${habit.completed} ? 'completed'">
+            <td>
+                <form th:action="@{'/habit/toggle/' + ${habit.id}}" method="post">
+                    <input class="checkbox" type="checkbox" name="completed" th:checked="${habit.completed}" onchange="this.form.submit()">
+                </form>
+            </td>
+            <td th:text="${habit.name}"></td>
+            <td th:text="${habit.description}"></td>
+            <td th:text="${habit.startDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <canvas id="progressChart" width="400" height="200"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    const data = {
+        labels: ['Completed', 'Pending'],
+        datasets: [{
+            data: [/*[[${completedCount}]]*/ [[${completedCount}]], [[${pendingCount}]]],
+            backgroundColor: ['#00796b', '#b2dfdb'],
+            hoverOffset: 4
+        }]
+    };
+    const config = {
+        type: 'doughnut',
+        data: data
+    };
+    new Chart(ctx, config);
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${habit.id != null} ? 'Edit Habit' : 'Add New Habit'">Add New Habit</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h4 class="mb-0 text-center" th:text="${habit.id != null} ? 'Edit Habit' : 'Add New Habit'">Add New Habit</h4>
+                </div>
+                <div class="card-body">
+                    <!-- FIXED: Use null-safe ternary for action (th:if for clarity) -->
+                    <form th:action="${habit.id != null} ? @{'/habit/edit/' + ${habit.id}} : @{/habit/add}" th:object="${habit}" method="post">
+                        <input type="hidden" th:field="*{id}" />
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Habit Name</label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="e.g., Exercise daily" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" th:field="*{description}" rows="3" placeholder="e.g., 30 minutes of workout"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="startDate" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" id="startDate" th:field="*{startDate}" required>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input" type="checkbox" id="completed" th:field="*{completed}">
+                            <label class="form-check-label" for="completed">Mark as Completed</label>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a th:href="@{/habits}" class="btn btn-secondary me-md-2">Cancel</a>
+                            <button type="submit" class="btn btn-custom btn-add">Save Habit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
