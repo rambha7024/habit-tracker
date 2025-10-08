@@ -85,11 +85,12 @@ The percentage updates dynamically whenever you mark a habit as complete.
 
 ## 🎨 UI Preview
 
-**Dashboard View**  
-![Dashboard Screenshot](link-to-dashboard-image)
+### 🖥️ Dashboard View
+<img src="C:\Users\hp\Pictures\Screenshots\Screenshot 2025-10-08 142942.png" alt="Dashboard" width="700">
 
-**Add Habit Form**  
-![Add Habit Form Screenshot](link-to-add-habit-image)
+### ➕ Add Habit Form
+<img src="C:\Users\hp\Pictures\Screenshots\Screenshot 2025-10-08 143137.png" width="400">
+
 
 ---
 
